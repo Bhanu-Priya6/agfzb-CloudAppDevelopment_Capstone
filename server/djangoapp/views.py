@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarDealer, DealerReview, CarModel, CarMake
-# .restapis import get_dealers_from_cf,get_dealer_reviews_from_cf,post_request
+from .restapis import get_dealers_from_cf,get_dealer_reviews_from_cf,post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 # Create an `about` view to render a static about page
-#week 1 T4
+
 def about(request):
     context = {}
     if request.method == "GET":
@@ -26,14 +26,14 @@ def about(request):
 
 
 # Create a `contact` view to return a static contact page
-#Week 1 T4
+
 def contact(request):
     context = {}
     if request.method == "GET":
         return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
-#week 2 t5
+
 def login_request(request):
     context = {}
     url = "https://08663624.us-south.apigw.appdomain.cloud/api/dealership"
@@ -59,7 +59,7 @@ def login_request(request):
 
 
 # Create a `logout_request` view to handle sign out request
-# Week 2 T5
+
 def logout_request(request):
     context = {}
     url = "https://08663624.us-south.apigw.appdomain.cloud/api/dealership"
@@ -75,7 +75,7 @@ def logout_request(request):
 
 
 # Create a `registration_request` view to handle sign up request
-#week 2 T7
+
 def registration_request(request):
     context = {}
     # If it is a GET request, just render the registration page
@@ -115,9 +115,9 @@ def get_dealerships(request):
         url = "https://08663624.us-south.apigw.appdomain.cloud/api/dealership"
         apikey="_xKRLnH-xVpGqx9u0VBB3dZUTVxhZ8JNVyxYY6ooCjB2"
         # Get dealers from the URL
-        #dealerships = get_dealers_from_cf(url)
+        dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
-        #context["dealership_list"]=dealerships
+        context["dealership_list"]=dealerships
         # Return a list of dealer short name
         return render(request, 'djangoapp/index.html', context)
 
